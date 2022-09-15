@@ -1,0 +1,36 @@
+@startuml
+abstract class Enseignant {
+- String nom
+- String prenom
+- String matiere
+- int nbHeures
+- int salaireHorraire
+- int salaire
++ int getSalaireHorraire()
++ void setSalaire(int)
++ int getNbHeures()
+}
+class Professeur {
++ String toString()
+}
+class Intervenant {
+}
+class Main {
+}
+class Promotion {
+- String nom
+- ArrayList<Enseignant> enseignants
+- ArrayList<Etudiant> etudiants
+}
+class Etudiant {
+- String nom
+- String prenom
+- String age
+- int noEtudiant
++ String toString()
+}
+
+
+Enseignant <|-- Professeur
+Enseignant <|-- Intervenant
+@enduml
