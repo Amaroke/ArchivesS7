@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Exemple table</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+
+      td {
+        border: 1px solid;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+
+  <body>
+    <table id="table">
+      <tr>
+        <td>A</td>
+        <td>B</td>
+        <td>C</td>
+        <td>D</td>
+        <td>E</td>
+        <td>F</td>
+      </tr>
+      <tr>
+        <td>G</td>
+        <td>H</td>
+        <td>I</td>
+        <td>J</td>
+        <td>K</td>
+        <td>L</td>
+      </tr>
+      <tr>
+        <td>M</td>
+        <td>N</td>
+        <td>O</td>
+        <td>P</td>
+        <td>Q</td>
+        <td>R</td>
+      </tr>
+      <tr>
+        <td>S</td>
+        <td>T</td>
+        <td>U</td>
+        <td>V</td>
+        <td>W</td>
+        <td>X</td>
+      </tr>
+      <tr>
+        <td>Y</td>
+        <td>Z</td>
+      </tr>
+    </table>
+    <script>
+      let voyelles = "AEIOUY";
+      let table = document.body.firstElementChild;
+      for (let row of table.rows) {
+        for (let cell of row.cells) {
+          if (voyelles.includes(cell.textContent)) {
+            cell.style.background = "gray";
+          }
+        }
+      }
+      table.addEventListener("click", onClick);
+
+      function onClick(event) {
+        let td = event.target.closest("td");
+        if (!td) {
+          return; // Clic dans la table mais pas dans une cellule
+        }
+        let tr = td.parentElement;
+        alert(
+          `Clic dans la cellule (${tr.rowIndex}, ${td.cellIndex}) de contenu ${td.textContent}.`
+        );
+      }
+    </script>
+  </body>
+</html>

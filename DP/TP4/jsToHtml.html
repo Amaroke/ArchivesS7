@@ -1,0 +1,119 @@
+<body>
+    <style>
+        li.collapsable::marker {
+            content: "";
+        }
+
+        li.collapsable span.collapsable:hover {
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        li.collapsable span.collapsable::before {
+            content: "- ";
+        }
+
+        li.collapsable.hidden span.collapsable::before {
+            content: "+ ";
+        }
+
+        li.collapsable.hidden ul {
+            display: none;
+        }
+
+        span.colored {
+            color: red;
+        }
+    </style>
+    <script>
+        function objToList(obj) {
+            let list = document.createElement("ul");
+            let nodes = Object.entries(obj).map(([key, value]) => {
+                let node = document.createElement("li");
+                node.append(key);
+                if (value) {
+                    node.append(objToList(value));
+                }
+                return node;
+            });
+            list.append(...nodes);
+            return list;
+        }
+
+        function addSpan(node, ...classes) {
+            let span = document.createElement("span");
+            span.classList.add(...classes);
+            node.replaceWith(span);
+            span.append(node);
+        }
+
+        function setCollapsable(list) {
+            let items = Array.from(list.querySelectorAll("li"));
+            items
+                .filter((item) => item.querySelector("ul"))
+                .forEach((item) => {
+                    addSpan(item.firstChild, "collapsable");
+                    item.classList.add("collapsable");
+                });
+            list.addEventListener("mousedown", (event) => {
+                let span = event.target.closest("span.collapsable");
+                if (span) {
+                    event.preventDefault();
+                }
+            });
+            list.addEventListener("click", (event) => {
+                let span = event.target.closest("span.collapsable");
+                if (span) {
+                    let li = span.closest("li.collapsable");
+                    li.classList.toggle("hidden");
+                }
+            });
+        }
+
+        function setColorable(list) {
+            let shiftDown = false;
+            let items = Array.from(list.querySelectorAll("li"));
+            items.forEach((item) => {
+                addSpan(item.firstChild, "colorable");
+            });
+            list.addEventListener("mousedown", (event) => {
+                if (event.shiftKey) {
+                    let span = event.target.closest("span.colorable");
+                    if (span) {
+                        event.preventDefault();
+                    }
+                }
+            });
+            list.addEventListener("click", (event) => {
+                if (event.shiftKey) {
+                    let span = event.target.closest("span.colorable");
+                    if (span) {
+                        span.classList.toggle("colored");
+                        event.stopImmediatePropagation();
+                    }
+                }
+            });
+        }
+
+        let data = {
+            Hominoidea: {
+                Hylobatidae: { Hylobate: null },
+                Hominidae: {
+                    Ponginae: { Pongo: null },
+                    Homininae: {
+                        Gorillini: { Gorilla: null },
+                        Homini: {
+                            Panina: { Pan: null },
+                            Hominina: { Homo: null },
+                        },
+                    },
+                },
+            },
+        };
+
+        let list = objToList(data);
+        setColorable(list);
+        setCollapsable(list);
+        document.body.append(list);
+    </script>
+</body>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Bubbling et capturing</title>
+    <style>
+      body * {
+        margin: 10px;
+        border: 1px solid blue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form>
+      FORM
+      <div>
+        DIV
+        <p>P</p>
+      </div>
+    </form>
+
+    <script>
+      for (let elem of document.querySelectorAll("*")) {
+        elem.addEventListener(
+          "click",
+          (event) => console.log(`Capturing: ${elem.tagName}`),
+          true
+        );
+        elem.addEventListener("click", (event) =>
+          console.log(`Bubbling: ${elem.tagName}`)
+        );
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Exemple setTimeout et setIntervalle</title>
+    <style>
+      #countdown {
+        width: 200px;
+        height: 100px;
+        font-weight: bold;
+        font-size: 50px;
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button id="button">Start</button>
+    <div id="countdown"></div>
+    <script>
+      let button = document.querySelector("#button");
+      let countdownText = document.querySelector("#countdown");
+      let colorRed = false;
+
+      button.addEventListener("click", () => countdown(3));
+
+      function countdown(time) {
+        countdownText.textContent = time;
+        if (time > 0) {
+          setTimeout(countdown, 1000, time - 1);
+        } else {
+          let timerId = setInterval(explode, 100);
+          setTimeout(() => clearInterval(timerId), 2000);
+        }
+      }
+
+      function explode() {
+        countdownText.style.backgroundColor = colorRed ? "Orange" : "Red";
+        colorRed = !colorRed;
+      }
+    </script>
+  </body>
+</html>

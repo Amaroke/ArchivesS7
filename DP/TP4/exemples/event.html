@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Exemple évènement</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="coords"></div>
+    <script>
+      document.body.addEventListener("keydown", keyHandler);
+      document.body.addEventListener("keyup", keyHandler);
+      document.body.addEventListener("click", clickHandler);
+      document.body.addEventListener("mousemove", mousemoveHandler);
+
+      function keyHandler(event) {
+        console.log(
+          `La touche ${event.key} a été ${
+            event.type == "keydown" ? "pressée" : "relâchée"
+          }.`
+        );
+      }
+
+      function clickHandler(event) {
+        alert(
+          `target is ${event.target.tagName} and currentTarget is ${event.currentTarget.tagName}.`
+        );
+      }
+
+      function mousemoveHandler(event) {
+        let coords = document.querySelector("#coords");
+        coords.textContent = `(${event.clientX}, ${event.clientY})`;
+      }
+    </script>
+  </body>
+</html>
