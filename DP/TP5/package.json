@@ -1,0 +1,15 @@
+{
+  "name": "mon-premier-serveur",
+  "version": "0.0.1",
+  "description": "Tests de nodejs et implémentation de serveurs simples.",
+  "homepage": "http://somewhere.that.i.used.to.know.com",
+  "licence": "MIT",
+  "author": "Julien Provillard",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "main": "server.js",
+  "license": "ISC",
+  "devDependencies": {}
+}
