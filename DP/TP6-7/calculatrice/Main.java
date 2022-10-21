@@ -13,8 +13,5 @@ public class Main {
         CalculatriceView v1 = new CalculatriceView(calculatrice, calculatriceController);
         CalculatriceVertical v2 = new CalculatriceVertical(calculatrice);
         CalculatriceHorizontal v3 = new CalculatriceHorizontal(calculatrice);
-        calculatrice.addView(v1);
-        calculatrice.addView(v2);
-        calculatrice.addView(v3);
     }
 }

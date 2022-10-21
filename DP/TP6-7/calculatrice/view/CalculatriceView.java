@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class CalculatriceView implements View {
+public class CalculatriceView {
 
     public static final int PLUS = -100;
     public static final int MINUS = -200;
@@ -27,6 +27,7 @@ public class CalculatriceView implements View {
     public CalculatriceView(Calculatrice calculatrice, CalculatriceController calculatriceController) {
         this.calculatrice = calculatrice;
         this.calculatriceController = calculatriceController;
+        this.calculatrice.addPropertyChangeListener("digitEnCours", event -> textField.setText(calculatrice.getDigitEnCours() == 0 ? "" : String.valueOf(calculatrice.getDigitEnCours())));
         buildFrame();
     }
 
@@ -81,11 +82,6 @@ public class CalculatriceView implements View {
 
         frame.pack();
         frame.setVisible(true);
-    }
-
-    @Override
-    public void refresh() {
-        textField.setText(calculatrice.getDigitEnCours() == 0 ? "" : String.valueOf(calculatrice.getDigitEnCours()));
     }
 
     class LocalListener implements ActionListener {

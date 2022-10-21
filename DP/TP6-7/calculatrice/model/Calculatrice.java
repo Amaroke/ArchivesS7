@@ -1,8 +1,7 @@
 package calculatrice.model;
 
-import calculatrice.view.View;
-
-import java.util.ArrayList;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 public class Calculatrice {
 
@@ -11,9 +10,11 @@ public class Calculatrice {
     private int digitEnCours;
     private String screenOperation;
     private String screenOperationVertical;
-    private final ArrayList<View> views = new ArrayList<>(3);
+    private final PropertyChangeSupport property;
+
 
     public Calculatrice() {
+        property = new PropertyChangeSupport(this);
         acc = 0;
         digitEnCours = 0;
         lastOperation = 0;
@@ -29,12 +30,16 @@ public class Calculatrice {
 
     public void setAcc(int acc) {
         this.acc = acc;
-        refreshViews();
+        property.firePropertyChange("digitEnCours", null, this.digitEnCours);
+        property.firePropertyChange("screenOperation", null, this.screenOperation);
+        property.firePropertyChange("stringV", null, this.screenOperationVertical);
     }
 
     public void setLastOperation(int lastOperation) {
         this.lastOperation = lastOperation;
-        refreshViews();
+        property.firePropertyChange("digitEnCours", null, this.digitEnCours);
+        property.firePropertyChange("screenOperation", null, this.screenOperation);
+        property.firePropertyChange("screenOperationV", null, this.screenOperationVertical);
     }
 
     public int getDigitEnCours() {
@@ -43,17 +48,9 @@ public class Calculatrice {
 
     public void setDigitEnCours(int digitEnCours) {
         this.digitEnCours = digitEnCours;
-        refreshViews();
-    }
-
-    public void addView(View view) {
-        this.views.add(view);
-    }
-
-    public void refreshViews() {
-        for(View v : this.views) {
-            v.refresh();
-        }
+        property.firePropertyChange("digitEnCours", null, this.digitEnCours);
+        property.firePropertyChange("screenOperation", null, this.screenOperation);
+        property.firePropertyChange("screenOperationV", null, this.screenOperationVertical);
     }
 
     public String getScreenOperation() {
@@ -70,5 +67,9 @@ public class Calculatrice {
 
     public void setScreenOperationVertical(String screenOperationVertical) {
         this.screenOperationVertical = screenOperationVertical;
+    }
+
+    public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
+        property.addPropertyChangeListener(propertyName, listener);
     }
 }

@@ -4,13 +4,15 @@ import calculatrice.model.Calculatrice;
 
 import javax.swing.*;
 
-public class CalculatriceVertical implements View {
+public class CalculatriceVertical {
 
     private final JTextArea textArea = new JTextArea();
     private final Calculatrice calculatrice;
 
     public CalculatriceVertical(Calculatrice calculatrice) {
         this.calculatrice = calculatrice;
+        this.calculatrice.addPropertyChangeListener("screenOperationV", event -> textArea.setText(calculatrice.getScreenOperationVertical()));
+
         JFrame frame = new JFrame("Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -27,10 +29,5 @@ public class CalculatriceVertical implements View {
 
         frame.pack();
         frame.setVisible(true);
-    }
-
-    @Override
-    public void refresh() {
-        textArea.setText(calculatrice.getScreenOperationVertical());
     }
 }
