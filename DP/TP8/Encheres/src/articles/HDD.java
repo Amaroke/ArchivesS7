@@ -25,4 +25,14 @@ public class HDD extends BasicComponent {
     public String toString(int depth) {
         return this.getName() + " " + constructor + " " + model + " - " + characteristic + "G / " + (!inStock ? "sold / " : " " + price + " euros / ") + id;
     }
+
+    @Override
+    public int getNbComponents() {
+        return 1;
+    }
+
+    @Override
+    public String getDescription() {
+        return this.toString(0);
+    }
 }

@@ -10,5 +10,13 @@ public class MotherBoard extends HardwareAssembly {
         return "MotherBoard";
     }
 
+    @Override
+    public int getNbComponents() {
+        return this.inStock();
+    }
 
+    @Override
+    public String getDescription() {
+        return this.toString(0);
+    }
 }

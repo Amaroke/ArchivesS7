@@ -16,4 +16,8 @@ public interface HardwareComponent {
 
     void setConstructor(String constructor);
 
+    int getNbComponents();
+
+    String getDescription();
+
 }

@@ -4,8 +4,8 @@ public abstract class BasicComponent implements HardwareComponent {
 
     protected int id;
     protected boolean inStock;
-    protected float price;
-    protected String model;
+    protected final float price;
+    protected final String model;
     protected String constructor;
 
     public BasicComponent(float price, String model, String constructor) {

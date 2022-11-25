@@ -22,4 +22,14 @@ public class Processor extends BasicComponent {
         return this.getName() + " " + constructor + " " + model + " - " + ((characteristic % 1 == 0.0) ? df.format(characteristic) : characteristic) + "Ghz / " + (!inStock ? "sold / " : " " + price + " euros / ") + id;
     }
 
+    @Override
+    public int getNbComponents() {
+        return 1;
+    }
+
+    @Override
+    public String getDescription() {
+        return this.toString(0);
+    }
+
 }

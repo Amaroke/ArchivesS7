@@ -10,4 +10,13 @@ public class Computer extends HardwareAssembly {
         return "Computer";
     }
 
+    @Override
+    public int getNbComponents() {
+        return this.inStock();
+    }
+
+    @Override
+    public String getDescription() {
+        return this.toString(0);
+    }
 }
