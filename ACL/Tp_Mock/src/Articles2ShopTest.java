@@ -72,6 +72,22 @@ class Articles2ShopTest {
 
         verify(stockServiceStrictMock);
     }
+    
+    @org.junit.jupiter.api.Test
+    void addArticleMinQuantityBoundary() {
+        stockServiceStrictMock.buy(anyObject());
+        expectLastCall().andThrow(new IllegalArgumentException());
+
+        replay(stockServiceStrictMock);
+
+        articles2Shop.addArticleMinQuantity("EasyMock Book", 3);
+
+        Article article = new Article("EasyMock Book", currency);
+
+        assertFalse(articles2Shop.getPanier().contains(article));
+
+        verify(stockServiceStrictMock);
+    }
 
 
 
