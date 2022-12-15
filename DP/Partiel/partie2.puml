@@ -1,0 +1,20 @@
+@startuml
+abstract class Decorateur {
+~ Carte carte
+}
+class DecorateurSpeciale {
++ String getDescription()
++ String getChef()
+}
+class DecorateurBraille {
++ String getDescription()
++ String getChef()
+- String toBraille(String)
+}
+
+
+Carte <|-- Decorateur
+Decorateur -- "1" Carte
+Decorateur <|-- DecorateurSpeciale
+Decorateur <|-- DecorateurBraille
+@enduml

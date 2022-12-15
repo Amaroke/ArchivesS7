@@ -1,0 +1,40 @@
+@startuml
+class Cuisine {
+- String chef
++ ArrayList<Carte> getCartes()
++ void update()
+}
+class Salle {
+- String responsable
++ Carte getCarteCourante()
++ String afficherCarteCourante()
++ void update()
+}
+class Restaurant {
+- boolean isCarteCouranteChange
++ void ajouterCarte(Carte)
++ void modifierCarteCourante(Carte)
++ void supprimerCarte(Carte)
++ Carte getCarteCourante()
++ String afficherCarteCourante()
++ ArrayList<Carte> getCartes()
++ boolean isCarteCouranteChange()
+}
+abstract class Observable {
++ void addObserver(Observer)
++ void notifyObservers()
+}
+interface Observer {
++ void update()
+}
+
+
+Observer <|.. Cuisine
+Observer <|.. Salle
+Observable <|-- Restaurant
+Cuisine -- "1" Restaurant
+Salle -- "1" Restaurant
+Restaurant -- "*" Carte
+Restaurant -- "1 (carte courante)" Carte
+Observable -- "*" Observer
+@enduml

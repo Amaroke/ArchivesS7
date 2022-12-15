@@ -1,0 +1,40 @@
+@startuml
+class SousCategorie {
+- String chef
+- String nom
++ String getDescription()
++ String getChef()
++ void ajouterCarte(Carte)
+}
+class Plat {
+- String ingredients
+- String description
++ String getDescription()
+}
+class Formule {
++ String getDescription()
++ void ajouterPlat(Plat)
+}
+abstract class ElementCarte {
+- String nom
+- int prix
+- String chef
++ int getPrix()
++ void ajouterPrix(int)
++ String getNom()
++ String getChef()
+}
+abstract class Carte {
++ {abstract}String getDescription()
++ {abstract}String getChef()
+}
+
+
+Carte <|-- SousCategorie
+ElementCarte <|-- Plat
+ElementCarte <|-- Formule
+Carte <|-- ElementCarte
+Formule -- "*" Plat
+SousCategorie -- "*" Carte
+Carte "cartePere" -- Carte
+@enduml
